@@ -18,8 +18,15 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    public List<Todo>getAll() {
+    public List<Todo> getAll() {
         return this.todoRepository.findAll();
+    }
+
+    public void delete(Long id) {
+        if (this.todoRepository.findById(id).isPresent()) {
+            this.todoRepository.deleteById(id);
+        } else {
+        }
     }
 
 }
