@@ -3,7 +3,6 @@ package home.pallagi.jozsef.todo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,13 +22,13 @@ public class TodoController {
     TodoService todoService;
 
     @GetMapping
-    ResponseEntity<List<Todo>> getTodos() {
-        return ResponseEntity.ok(this.todoService.getAll());
+    List<Todo> getTodos() {
+        return this.todoService.getAll();
     }
 
     @PostMapping
-    ResponseEntity<Todo> save(Todo todo) {
-        return ResponseEntity.ok(this.todoService.save(todo));
+    Todo save(Todo todo) {
+        return this.todoService.save(todo);
     }
 
     @PatchMapping
