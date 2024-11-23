@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import home.pallagi.jozsef.todo.entity.Todo;
+import home.pallagi.jozsef.todo.model.QueryDTO;
 import home.pallagi.jozsef.todo.service.TodoService;
 
 @RestController
@@ -22,8 +24,8 @@ public class TodoController {
     TodoService todoService;
 
     @GetMapping
-    List<Todo> getTodos() {
-        return this.todoService.getAll();
+    List<Todo> getTodos(@ModelAttribute QueryDTO query) {
+        return this.todoService.getAll(query);
     }
 
     @PostMapping
@@ -33,7 +35,7 @@ public class TodoController {
 
     @PatchMapping
     Todo update(Todo todo) {
-        throw new UnsupportedOperationException("Not implemented yet");
+       return this.todoService.update(todo);
     }
 
     @DeleteMapping("/{id}")

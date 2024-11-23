@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import home.pallagi.jozsef.todo.entity.Todo;
+import home.pallagi.jozsef.todo.model.QueryDTO;
 import home.pallagi.jozsef.todo.repository.TodoRepository;
 
 @Service
@@ -20,8 +21,19 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    public List<Todo> getAll() {
-        return this.todoRepository.findAll();
+    public Todo update(Todo todo) {
+        if (this.todoRepository.findById(todo.getId()).isPresent()) {
+            return todoRepository.save(todo);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public List<Todo> getAll(QueryDTO query) {
+        return query.getTitle() != null | query.getDescription() != null
+                ? this.todoRepository.findByTitleContainingOrDescriptionContaining(query.getTitle(),
+                        query.getDescription())
+                : this.todoRepository.findAll();
     }
 
     public void delete(Long id) {
