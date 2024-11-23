@@ -36,7 +36,7 @@ public class TodoServiceUnitTests {
     }
 
     @Test
-    @Order(2)
+    @Order(1)
     public void saveTodoTest() {
         given(todoRepository.save(todo)).willReturn(todo);
 
