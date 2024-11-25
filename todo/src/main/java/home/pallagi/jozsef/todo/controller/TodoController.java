@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -37,6 +36,11 @@ public class TodoController {
         return this.todoService.getAll(query);
     }
 
+    @GetMapping("/{id}")
+    Todo getSingle(@PathVariable("id") Long id) {
+        return this.todoService.getSingle(id);
+    }
+
     @PostMapping
     Todo save(@Valid @RequestBody Todo todo) {
         return this.todoService.save(todo);
@@ -55,14 +59,13 @@ public class TodoController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
+            MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
             // String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put("message", errorMessage);
         });
-        System.out.println(errors);
         return errors;
     }
 
