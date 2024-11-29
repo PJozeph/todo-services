@@ -1,17 +1,17 @@
-FROM gradle:jdk21-alpine AS build
+FROM maven:3.8.6-openjdk-21-slim AS build
 
-COPY --chown=gradle:gradle . /home/gradle/src
+COPY --chown=maven:maven . /home/maven/src
 
-WORKDIR /home/gradle/src
+WORKDIR /home/maven/src
 
-RUN gradle bootJar --no-daemon
+RUN mvn clean package -DskipTests
 
-FROM gradle:jdk21-alpine
+# FROM openjdk:21-slim
 
-RUN mkdir /app
+# RUN mkdir /app
 
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/server-0.0.1-SNAPSHOT.jar
+# COPY --from=build /home/maven/src/target/*.jar /app/server-0.0.1-SNAPSHOT.jar
 
-EXPOSE 8080
+# EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/app/server-0.0.1-SNAPSHOT.jar"]
+# ENTRYPOINT ["java","-jar","/app/server-0.0.1-SNAPSHOT.jar"]
