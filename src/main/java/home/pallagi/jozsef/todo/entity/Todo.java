@@ -21,7 +21,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Email is mandatory")
+    @NotEmpty(message = "Title is mandatory")
     private String title;
     private String description;
     private boolean completed;

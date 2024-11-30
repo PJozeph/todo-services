@@ -22,17 +22,18 @@ public class TodoRepositoryUnitTests {
     @Autowired
     private TodoRepository todoRepository;
 
-    // @Test
-    // @DisplayName("Test 1:Save Todo Test")
-    // @Order(1)
-    // @Rollback(value = false)
-    // public void saveTodoTest() {
-    //     Todo employee = new Todo();
+    @Test
+    @DisplayName("Test 1:Save Todo Test")
+    @Order(1)
+    @Rollback(value = false)
+    public void saveTodoTest() {
+        Todo employee = new Todo();
+        employee.setTitle("buy milk");
 
-    //     todoRepository.save(employee);
+        todoRepository.save(employee);
 
-    //     Assertions.assertThat(employee.getId()).isGreaterThan(0);
-    // }
+        Assertions.assertThat(employee.getId()).isGreaterThan(0);
+    }
 
     @Test
     @Order(2)

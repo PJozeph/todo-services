@@ -35,15 +35,15 @@ public class TodoServiceUnitTests {
         todo.setDescription("Test Description");
     }
 
-    // @Test
-    // @Order(1)
-    // public void saveTodoTest() {
-    //     given(todoRepository.save(todo)).willReturn(todo);
+    @Test
+    @Order(1)
+    public void saveTodoTest() {
+        given(todoRepository.save(todo)).willReturn(todo);
 
-    //     Todo savedTodo = todoService.save(todo);
+        Todo savedTodo = todoService.save(todo);
 
-    //     assertThat(savedTodo).isNotNull();
-    // }
+        assertThat(savedTodo).isNotNull();
+    }
 
 
 }
