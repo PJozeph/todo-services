@@ -14,7 +14,7 @@ RUN mvn clean package
 
 
 # Copy the todo-0.0.1-SNAPSHOT.jar file to the container
-COPY target/todo-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY target/todo-0.0.1-SNAPSHOT.jar app.jar
 
 # # Run the jar file
 CMD ["java", "-jar", "app.jar"]
