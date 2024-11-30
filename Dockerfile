@@ -17,5 +17,7 @@ RUN mvn clean package
 # Copy the built JAR to the container
 COPY target/todo-0.0.1-SNAPSHOT.jar app.jar
 
+EXPOSE 8080
+
 # Run the JAR file
 CMD ["java", "-jar", "app.jar"]
