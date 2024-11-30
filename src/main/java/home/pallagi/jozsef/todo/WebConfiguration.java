@@ -1,4 +1,4 @@
-package home.pallagi.jozsef.todo.config;
+package home.pallagi.jozsef.todo;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
