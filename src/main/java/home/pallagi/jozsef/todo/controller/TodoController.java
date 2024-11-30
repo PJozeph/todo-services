@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +34,6 @@ public class TodoController {
     @Autowired
     TodoService todoService;
 
-    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping
     List<Todo> getTodos(@Nullable @ModelAttribute QueryDTO query) {
         return this.todoService.getAll(query);
