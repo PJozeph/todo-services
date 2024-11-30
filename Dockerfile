@@ -3,18 +3,19 @@ FROM eclipse-temurin:17-jdk-alpine
 
 # Set the working directory
 WORKDIR /app
+
+# Copy project files
 COPY pom.xml .
 COPY src ./src
 
-# install maven
-RUN apk add maven
+# Install Maven
+RUN apk add --no-cache maven
 
-# build the project
+# Build the project
 RUN mvn clean package
 
+# Copy the built JAR to the container
+COPY target/todo-0.0.1-SNAPSHOT.jar app.jar
 
-# Copy the todo-0.0.1-SNAPSHOT.jar file to the container
-# COPY target/todo-0.0.1-SNAPSHOT.jar app.jar
-
-# # Run the jar file
-CMD ["java", "-jar", "todo-0.0.1-SNAPSHOT.jar"]
+# Run the JAR file
+CMD ["java", "-jar", "app.jar"]
