@@ -45,5 +45,4 @@ public class TodoServiceUnitTests {
         assertThat(savedTodo).isNotNull();
     }
 
-
 }
