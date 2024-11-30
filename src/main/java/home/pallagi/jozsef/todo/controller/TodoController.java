@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import home.pallagi.jozsef.todo.entity.Label;
 import home.pallagi.jozsef.todo.entity.Todo;
 import home.pallagi.jozsef.todo.model.QueryDTO;
 import home.pallagi.jozsef.todo.service.TodoService;
@@ -50,8 +49,8 @@ public class TodoController {
     }
 
     @PostMapping("/addLabel")
-    Todo addLabel(Label label, @RequestParam("todoId") Long todoId) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    Todo addLabel(@RequestParam("todoId") Long todoId, @RequestParam("labelId") Long labelId) {
+        return this.todoService.addLabel(todoId, labelId);
     }
 
     @PatchMapping
