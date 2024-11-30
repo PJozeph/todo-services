@@ -13,7 +13,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @EnableJpaRepositories("home.pallagi.jozsef.todo.repository")
 @EntityScan("home.pallagi.jozsef.todo.entity")
 @OpenAPIDefinition(info = @Info(title = "Todo Service API", version = "1.0", description = "API for managing todos"), servers = {
-        @Server(url = "https://todo-service-681005455667.us-central1.run.app", description = "Cloud Run Server")
+		@Server(url = "https://todo-service-681005455667.us-central1.run.app", description = "Cloud Run Server")
 })
 public class TodoApplication {
 
