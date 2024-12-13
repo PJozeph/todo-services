@@ -69,4 +69,14 @@ public class TodoServiceUnitTests {
         assertThat(violations.size()).isEqualTo(1);
     }
 
+    @Test
+    @Order(3)
+    public void addLabelToTodoTest() {
+        given(todoRepository.findById(1L)).willReturn(java.util.Optional.of(todo));
+
+        Todo updatedTodo = todoService.addLabel(1L, 1L);
+
+        assertThat(updatedTodo.getLabels().size()).isEqualTo(1);
+    }
+
 }

@@ -32,6 +32,10 @@ public class TodoService {
         return this.todoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
+    public List<Todo> getTodosByLabel(Long labelId) {
+        return this.todoRepository.todosByLabel(labelId);
+    }
+
     public Todo update(Todo todo) {
         if (this.todoRepository.findById(todo.getId()).isPresent()) {
             return todoRepository.save(todo);

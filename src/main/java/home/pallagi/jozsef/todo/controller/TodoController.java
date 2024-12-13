@@ -43,6 +43,11 @@ public class TodoController {
         return this.todoService.getSingle(id);
     }
 
+    @GetMapping("/byLabel/{labelId}")
+    List<Todo> getLabelsByTodo(@PathVariable("labelId") Long labelId) {
+        return todoService.getTodosByLabel(labelId);
+    }
+
     @PostMapping
     Todo save(@Valid @RequestBody Todo todo) {
         return this.todoService.save(todo);
