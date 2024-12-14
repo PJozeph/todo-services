@@ -14,11 +14,11 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    @Value("${bezkoder.app.jwtSecret}")
-    private String jwtSecret;
+//    @Value("$pallagi.app.jwtSecret}")
+    private String jwtSecret = "******very_big_secre******";
 
-    @Value("${bezkoder.app.jwtExpirationMs}")
-    private int jwtExpirationMs;
+//    @Value("${pallagi.app.jwtExpirationMs}")
+    private int jwtExpirationMs = 9000000;
 
     public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
