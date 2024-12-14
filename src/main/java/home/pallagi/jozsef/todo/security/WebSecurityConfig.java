@@ -52,9 +52,11 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/api/test/**").permitAll()
-                                .anyRequest().authenticated()
+                        auth.requestMatchers("/api/auth/**").permitAll()    // Allow authentication API
+                                .requestMatchers("/api/test/**").permitAll()    // Allow test API
+                                .requestMatchers("/swagger-ui/**").permitAll()  // Allow Swagger UI
+                                .requestMatchers("/v3/api-docs/**").permitAll() // Allow Swagger docs
+                                .anyRequest().authenticated()  // Secure other endpoints
                 );
 
         http.authenticationProvider(authenticationProvider());
