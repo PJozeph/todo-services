@@ -7,3 +7,6 @@ INSERT INTO label (title) VALUES ('Home'), ('Work');
 INSERT INTO todo_label (todo_id, label_id) VALUES 
 (1, 1),
 (2, 2);
+
+INSERT INTO "USER" (username, email, password) VALUES ('username', 'user@gmail.com', '$2a$10$3');
+
