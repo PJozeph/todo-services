@@ -4,7 +4,9 @@
 1. Clone the repository
 2. Run the following command
 ```bash
-mvn spring-boot:run
+docker build -t todo-app .
+
+docker run -p 8080:8080 todo-app
 ```
 
 ## Deployed to Google cloud
