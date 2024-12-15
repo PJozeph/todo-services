@@ -7,12 +7,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Entity(name = "users")
 @Getter
 @Setter
+@NoArgsConstructor
 public class User {
 
     @Id

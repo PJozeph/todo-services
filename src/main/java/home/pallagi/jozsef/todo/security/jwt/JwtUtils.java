@@ -15,7 +15,7 @@ import java.util.Date;
 public class JwtUtils {
 
 //    @Value("$pallagi.app.jwtSecret}")
-    private String jwtSecret = "******very_big_secre******";
+    private String jwtSecret = "veryBigSecret67763663hhdgdgdhh33666ggshbjhj666373752";
 
 //    @Value("${pallagi.app.jwtExpirationMs}")
     private int jwtExpirationMs = 9000000;

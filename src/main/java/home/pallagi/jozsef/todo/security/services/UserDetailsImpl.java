@@ -1,6 +1,8 @@
 package home.pallagi.jozsef.todo.security.services;
 
 import home.pallagi.jozsef.todo.entity.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +11,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Getter
+@Setter
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;
