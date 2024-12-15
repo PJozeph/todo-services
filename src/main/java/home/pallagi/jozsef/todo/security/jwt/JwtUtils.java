@@ -4,7 +4,6 @@ import home.pallagi.jozsef.todo.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +13,10 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-//    @Value("$pallagi.app.jwtSecret}")
+    //    @Value("$pallagi.app.jwtSecret}")
     private String jwtSecret = "veryBigSecret67763663hhdgdgdhh33666ggshbjhj666373752";
 
-//    @Value("${pallagi.app.jwtExpirationMs}")
+    //    @Value("${pallagi.app.jwtExpirationMs}")
     private int jwtExpirationMs = 9000000;
 
     public String generateJwtToken(Authentication authentication) {
@@ -32,11 +31,7 @@ public class JwtUtils {
 
 
     public String getUserNameFromJwtToken(String token) {
-        Jwe<Claims> jwe = Jwts.parser()
-                .decryptWith(key())
-                .build()
-                .parseEncryptedClaims(token);
-        return jwe.getPayload().getSubject();
+        return Jwts.parser().verifyWith(key()).build().parseSignedClaims(token).getPayload().getSubject();
     }
 
     private SecretKey key() {
@@ -46,9 +41,9 @@ public class JwtUtils {
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser()
-                    .decryptWith(key())
+                    .verifyWith(key())
                     .build()
-                    .parseEncryptedClaims(authToken);
+                    .parseSignedClaims(authToken);
             return true;
         } catch (MalformedJwtException e) {
 //            logger.error("Invalid JWT token: {}", e.getMessage());

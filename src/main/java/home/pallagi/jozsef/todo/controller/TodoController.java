@@ -1,5 +1,6 @@
 package home.pallagi.jozsef.todo.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,8 @@ public class TodoController {
     TodoService todoService;
 
     @GetMapping
-    List<Todo> getTodos(@Nullable @ModelAttribute QueryDTO query) {
+    List<Todo> getTodos(@Nullable @ModelAttribute QueryDTO query, Principal principal) {
+        System.out.println(principal.getName());
         return this.todoService.getAll(query);
     }
 
@@ -49,7 +51,7 @@ public class TodoController {
     }
 
     @PostMapping
-    Todo save(@Valid @RequestBody Todo todo) {
+    Todo save(@Valid @RequestBody Todo todo, Principal principal) {
         return this.todoService.save(todo);
     }
 
