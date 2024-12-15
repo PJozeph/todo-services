@@ -8,5 +8,11 @@ INSERT INTO todo_label (todo_id, label_id) VALUES
 (1, 1),
 (2, 2);
 
-INSERT INTO "USER" (username, email, password) VALUES ('username', 'user@gmail.com', '$2a$10$3');
+INSERT INTO USERS (username, email, password)
+VALUES ('john_doe', 'john.doe@example.com', 'password123');
 
+INSERT INTO USERS (username, email, password)
+VALUES ('jane_smith', 'jane.smith@example.com', 'securepass456');
+
+INSERT INTO USERS (username, email, password)
+VALUES ('alice_jones', 'alice.jones@example.com', 'mypassword789');
