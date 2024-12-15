@@ -3,6 +3,7 @@ INSERT INTO USERS (username, email, password)
 VALUES 
 ('john_doe', 'john.doe@example.com', 'password123'),
 ('jane_smith', 'jane.smith@example.com', 'securepass456'),
+('joe', 'pallagijoe@gmail.com', '$2b$12$B3P2TJLx3F4Bhn6jHglLSOSc1g3Ri64VvDIwXz6HOkvxCrTXrbszS'),
 ('alice_jones', 'alice.jones@example.com', 'mypassword789');
 
 -- Then insert into TODO table
