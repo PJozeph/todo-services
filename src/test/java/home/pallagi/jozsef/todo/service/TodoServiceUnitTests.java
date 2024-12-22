@@ -1,5 +1,6 @@
 package home.pallagi.jozsef.todo.service;
 
+import home.pallagi.jozsef.todo.security.services.UserDetailsImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -9,9 +10,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.mockito.BDDMockito.given;
 
+import java.security.Principal;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,6 +26,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
+import org.springframework.security.core.Authentication;
 
 @ExtendWith(MockitoExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -52,8 +57,14 @@ public class TodoServiceUnitTests {
     @Order(1)
     public void saveTodoTest() {
         given(todoRepository.save(todo)).willReturn(todo);
+        Authentication auth = Mockito.mock(Authentication.class);
+        UserDetailsImpl userDetails = new UserDetailsImpl(1L,
+                "test"
+                , "email@test"
+                , "test");
+        Mockito.when(auth.getPrincipal()).thenReturn(userDetails);
 
-        Todo savedTodo = todoService.save(todo, null);
+        Todo savedTodo = todoService.save(todo, auth);
 
         assertThat(savedTodo).isNotNull();
     }
