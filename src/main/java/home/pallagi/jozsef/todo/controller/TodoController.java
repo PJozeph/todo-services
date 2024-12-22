@@ -8,13 +8,11 @@ import java.util.Map;
 import home.pallagi.jozsef.todo.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,8 +45,12 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
-    Todo getSingle(@PathVariable("id") Long id) {
-        return this.todoService.getSingle(id);
+    Todo getSingle(@PathVariable("id") Long id, Authentication principal) {
+        UserDetailsImpl currentUser = (UserDetailsImpl) principal.getPrincipal();
+        return this.todoService.getSingle(
+                id,
+                currentUser.getId()
+        );
     }
 
     @GetMapping("/byLabel/{labelId}")
