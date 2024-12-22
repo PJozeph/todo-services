@@ -1,6 +1,5 @@
 package home.pallagi.jozsef.todo.controller;
 
-import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,9 +58,10 @@ public class TodoController {
         return todoService.getTodosByLabel(labelId, currentUser.getId());
     }
 
-    @PostMapping
-    Todo save(@Valid @RequestBody Todo todo, Principal principal) {
-        return this.todoService.save(todo);
+    @PostMapping()
+    Todo save(@Valid @RequestBody Todo todo, Authentication authentication) {
+
+        return this.todoService.save(todo, authentication);
     }
 
     @PostMapping("/addLabel")

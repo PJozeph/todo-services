@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import home.pallagi.jozsef.todo.entity.User;
+import home.pallagi.jozsef.todo.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -24,7 +27,14 @@ public class TodoService {
     @Autowired
     LabelRepository labelRepository;
 
-    public Todo save(Todo todo) {
+    public Todo save(Todo todo, Authentication principal) {
+        UserDetailsImpl currentUser = (UserDetailsImpl) principal.getPrincipal();
+        User user = User.builder().
+                id(currentUser.getId()).
+                username(currentUser.getUsername()).
+                email(currentUser.getEmail()).
+                build();
+        todo.setUser(user);
         return todoRepository.save(todo);
     }
 

@@ -53,7 +53,7 @@ public class TodoServiceUnitTests {
     public void saveTodoTest() {
         given(todoRepository.save(todo)).willReturn(todo);
 
-        Todo savedTodo = todoService.save(todo);
+        Todo savedTodo = todoService.save(todo, null);
 
         assertThat(savedTodo).isNotNull();
     }
