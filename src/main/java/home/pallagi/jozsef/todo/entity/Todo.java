@@ -4,17 +4,15 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Todo {
 
     @Id
@@ -27,59 +25,16 @@ public class Todo {
     private boolean completed;
     private Date deadline;
 
+    @ManyToOne(fetch = FetchType.LAZY) // Many Todos belong to one User
+    @JoinColumn(name = "user_id", nullable = false) // Foreign key in the Todo table
+    @JsonIgnore
+    private User user;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "todo_label", // Name of the join table
             joinColumns = @JoinColumn(name = "todo_id"), // Foreign key for Todo
             inverseJoinColumns = @JoinColumn(name = "label_id") // Foreign key for Label
     )
     private Set<Label> labels = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public Set<Label> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(Set<Label> labels) {
-        this.labels = labels;
-    }
 
 }

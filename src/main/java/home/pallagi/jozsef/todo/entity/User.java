@@ -1,14 +1,14 @@
 package home.pallagi.jozsef.todo.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @Entity(name = "users")
@@ -30,5 +30,8 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Todo> todos = new HashSet<>();
 
 }

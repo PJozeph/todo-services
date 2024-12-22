@@ -59,11 +59,11 @@ public class TodoService {
 
     }
 
-    public List<Todo> getAll(QueryDTO query) {
+    public List<Todo> getAll(QueryDTO query, Long userId) {
         return query.getTitle() != null | query.getDescription() != null
-                ? this.todoRepository.findByTitleContainingOrDescriptionContaining(query.getTitle(),
-                        query.getDescription())
-                : this.todoRepository.findAll();
+                ? this.todoRepository.findByUserIdAndTitleContainingOrDescriptionContaining(userId, query.getTitle(),
+                query.getDescription())
+                : this.todoRepository.findByUserId(userId);
     }
 
     public void delete(Long id) {

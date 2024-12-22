@@ -10,7 +10,11 @@ VALUES
 INSERT INTO TODO (title, description, completed, deadline, user_id) 
 VALUES
 ('Buy Milk', 'Description for task 1', false, '2024-11-25', 1),
-('Clean House', 'Description for task 2', true, '2024-11-30', 1);
+('Clean House', 'Description for task 2', true, '2024-11-30', 1),
+('Read Book', 'Description for task 3', false, '2024-12-01', 2),
+('Go to Gym', 'Description for task 4', false, '2024-12-05', 2),
+('Cook Dinner', 'Description for task 5', false, '2024-12-10', 3),
+('Call Mom', 'Description for task 6', false, '2024-12-15', 3);
 
 -- Insert into LABEL table
 INSERT INTO LABEL (title) 

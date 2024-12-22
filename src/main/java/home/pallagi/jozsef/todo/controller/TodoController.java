@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import home.pallagi.jozsef.todo.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,9 +37,9 @@ public class TodoController {
     TodoService todoService;
 
     @GetMapping
-    List<Todo> getTodos(@Nullable @ModelAttribute QueryDTO query, Principal principal) {
-        System.out.println(principal.getName());
-        return this.todoService.getAll(query);
+    List<Todo> getTodos(@Nullable @ModelAttribute QueryDTO query, Authentication principal) {
+        UserDetailsImpl currentUser = (UserDetailsImpl) principal.getPrincipal();
+        return this.todoService.getAll(query, currentUser.getId());
     }
 
     @GetMapping("/{id}")
