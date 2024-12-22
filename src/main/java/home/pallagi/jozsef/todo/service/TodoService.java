@@ -27,8 +27,8 @@ public class TodoService {
     @Autowired
     LabelRepository labelRepository;
 
-    public Todo save(Todo todo, Authentication principal) {
-        UserDetailsImpl currentUser = (UserDetailsImpl) principal.getPrincipal();
+    public Todo save(Todo todo, Authentication auth) {
+        UserDetailsImpl currentUser = (UserDetailsImpl) auth.getPrincipal();
         User user = User.builder().
                 id(currentUser.getId()).
                 username(currentUser.getUsername()).
