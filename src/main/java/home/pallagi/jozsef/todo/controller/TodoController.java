@@ -54,8 +54,9 @@ public class TodoController {
     }
 
     @GetMapping("/byLabel/{labelId}")
-    List<Todo> getLabelsByTodo(@PathVariable("labelId") Long labelId) {
-        return todoService.getTodosByLabel(labelId);
+    List<Todo> getLabelsByTodo(@PathVariable("labelId") Long labelId, Authentication principal) {
+        UserDetailsImpl currentUser = (UserDetailsImpl) principal.getPrincipal();
+        return todoService.getTodosByLabel(labelId, currentUser.getId());
     }
 
     @PostMapping

@@ -32,8 +32,11 @@ public class TodoService {
         return this.todoRepository.findByUserIdAndId(userId, todoId);
     }
 
-    public List<Todo> getTodosByLabel(Long labelId) {
-        return this.todoRepository.todosByLabel(labelId);
+    public List<Todo> getTodosByLabel(Long labelId, Long userId) {
+        return this.todoRepository.todosByLabelAndUserId(
+                labelId,
+                userId
+        );
     }
 
     public Todo update(Todo todo) {
