@@ -37,8 +37,12 @@ public class TodoController {
     TodoService todoService;
 
     @GetMapping
-    List<Todo> getTodos(@Nullable @ModelAttribute QueryDTO query, Authentication principal) {
+    List<Todo> getTodos(
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "description", required = false) String description,
+            Authentication principal) {
         UserDetailsImpl currentUser = (UserDetailsImpl) principal.getPrincipal();
+        QueryDTO query = new QueryDTO(title, description);
         return this.todoService.getAll(query, currentUser.getId());
     }
 
