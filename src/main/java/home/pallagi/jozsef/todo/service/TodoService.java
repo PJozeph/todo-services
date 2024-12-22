@@ -39,7 +39,8 @@ public class TodoService {
     }
 
     public Todo getSingle(Long todoId, Long userId) {
-        return this.todoRepository.findByUserIdAndId(userId, todoId);
+        return this.todoRepository.findByUserIdAndId(userId, todoId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
     public List<Todo> getTodosByLabel(Long labelId, Long userId) {
@@ -57,8 +58,9 @@ public class TodoService {
         }
     }
 
-    public Todo addLabel(Long todoId, Long labelId) {
-        Optional<Todo> todo = this.todoRepository.findById(todoId);
+    public Todo addLabel(Long todoId, Long labelId, Authentication auth) {
+        UserDetailsImpl currentUser = (UserDetailsImpl) auth.getPrincipal();
+        Optional<Todo> todo = this.todoRepository.findByUserIdAndId(currentUser.getId(), todoId);
         Optional<Label> labelToAdd = this.labelRepository.findById(labelId);
         if (todo.isPresent() && labelToAdd.isPresent()) {
             Todo updateTodo = todo.get();

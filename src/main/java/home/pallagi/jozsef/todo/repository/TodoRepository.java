@@ -1,6 +1,7 @@
 package home.pallagi.jozsef.todo.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +19,5 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
 
     List<Todo> findByUserId(Long userId);
 
-    Todo findByUserIdAndId(Long userId, Long id);
+    Optional<Todo> findByUserIdAndId(Long userId, Long id);
 }

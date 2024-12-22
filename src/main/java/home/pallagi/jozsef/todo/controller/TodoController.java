@@ -60,13 +60,12 @@ public class TodoController {
 
     @PostMapping()
     Todo save(@Valid @RequestBody Todo todo, Authentication authentication) {
-
         return this.todoService.save(todo, authentication);
     }
 
     @PostMapping("/addLabel")
-    Todo addLabel(@RequestParam("todoId") Long todoId, @RequestParam("labelId") Long labelId) {
-        return this.todoService.addLabel(todoId, labelId);
+    Todo addLabel(@RequestParam("todoId") Long todoId, @RequestParam("labelId") Long labelId, Authentication authentication) {
+        return this.todoService.addLabel(todoId, labelId, authentication);
     }
 
     @PatchMapping
