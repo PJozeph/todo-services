@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import home.pallagi.jozsef.todo.security.services.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("todo")
+@SecurityRequirement(name = "Bearer Authentication")
 public class TodoController {
 
     @Autowired
