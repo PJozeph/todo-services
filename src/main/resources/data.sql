@@ -24,4 +24,6 @@ VALUES ('Home'), ('Work');
 INSERT INTO TODO_LABEL (todo_id, label_id) 
 VALUES 
 (1, 1),
+(6, 1),
+(5, 2),
 (2, 2);
