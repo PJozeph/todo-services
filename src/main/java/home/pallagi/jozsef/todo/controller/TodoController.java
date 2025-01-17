@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import home.pallagi.jozsef.todo.exceptions.TodoNotFoundException;
 import home.pallagi.jozsef.todo.security.services.UserDetailsImpl;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class TodoController {
         return this.todoService.getSingle(
                 id,
                 currentUser.getId()
-        );
+        ).orElseThrow(() -> new TodoNotFoundException("Todo not found with " + id + " id"));
     }
 
     @GetMapping("/byLabel/{labelId}")

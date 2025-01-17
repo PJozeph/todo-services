@@ -38,9 +38,8 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
-    public Todo getSingle(Long todoId, Long userId) {
-        return this.todoRepository.findByUserIdAndId(userId, todoId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+    public Optional<Todo> getSingle(Long todoId, Long userId) {
+        return this.todoRepository.findByUserIdAndId(userId, todoId);
     }
 
     public List<Todo> getTodosByLabel(Long labelId, Long userId) {
