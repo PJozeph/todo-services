@@ -2,13 +2,15 @@ package home.pallagi.jozsef.todo.controller;
 
 import home.pallagi.jozsef.todo.exceptions.ErrorResponse;
 import home.pallagi.jozsef.todo.exceptions.TodoNotFoundException;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
-public class GlobalExceptionHandler {
+@Hidden
+@RestControllerAdvice()
+public class GlobalExceptionHandler  {
 
     @ExceptionHandler(TodoNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleTodoNotFoundException(TodoNotFoundException ex) {
